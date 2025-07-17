@@ -101,21 +101,21 @@ function App() {
     },
     {
       id: 10,
-      title: "Yahoo! Maps Interactive Components",
-      description: "Developed interactive mapping components using Adobe Flex and AJAX for Yahoo! Maps",
-      technologies: ["Adobe Flex", "AJAX", "ActionScript", "Interactive Maps"],
-      startDate: "2006-01",
-      endDate: "2008-12",
+      title: "Yahoo! Maps Product Development",
+      description: "Built core Yahoo Maps product features and interactive mapping components as part of Yahoo Inc Maps team",
+      technologies: ["Adobe Flex", "ActionScript", "AJAX", "Flash", "Mapping APIs"],
+      startDate: "2004-01",
+      endDate: "2006-12",
       type: "work" as const,
-      githubUrl: "https://github.com/gregoryStarr/interactive-mapping-components"
+      githubUrl: "https://github.com/gregoryStarr/yahoo-maps-product"
     },
     {
       id: 11,
       title: "FriendFinder Live Video & Chat",
       description: "Led development of live video and chat features for interactive media experiences",
       technologies: ["ActionScript", "Flash", "Live Video", "Real-time Chat"],
-      startDate: "2004-01",
-      endDate: "2005-12",
+      startDate: "2001-01",
+      endDate: "2003-12",
       type: "work" as const,
       githubUrl: "https://github.com/gregoryStarr/live-video-chat-platform"
     },
@@ -132,36 +132,36 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="container mx-auto px-4 py-8">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="container mx-auto px-6 py-6 max-w-7xl">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-light text-white mb-2 tracking-tight">
             Gregory Allen Starr
           </h1>
-          <p className="text-xl text-gray-300 mb-6">
-            Interactive Career Timeline
+          <p className="text-lg text-slate-300 font-light mb-4">
+            Senior Software Engineer • 20+ Years Experience
           </p>
           
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex justify-center items-center space-x-3">
             <button
               onClick={() => setUseGitHubDataMode(false)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
                 !useGitHubDataMode 
-                  ? 'bg-purple-600 text-white' 
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25' 
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'
               }`}
             >
-              Sample Projects
+              Career Projects
             </button>
             <button
               onClick={() => {
                 setUseGitHubDataMode(true)
                 fetchData()
               }}
-              className={`px-4 py-2 rounded-lg transition-colors ${
+              className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
                 useGitHubDataMode 
-                  ? 'bg-purple-600 text-white' 
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25' 
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'
               }`}
             >
               Live GitHub Data
@@ -172,30 +172,32 @@ function App() {
         <TimelineScrubber
           currentYear={currentYear}
           onYearChange={setCurrentYear}
-          startYear={2010}
+          startYear={2001}
           endYear={2025}
         />
 
         {loading && useGitHubDataMode && (
-          <div className="text-center mt-8">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
-            <p className="text-gray-400 mt-2">Loading GitHub projects...</p>
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-3 border-slate-600 border-t-blue-500"></div>
+            <p className="text-slate-300 mt-3">Loading GitHub projects...</p>
           </div>
         )}
 
         {error && useGitHubDataMode && (
-          <div className="text-center mt-8">
-            <p className="text-red-400">Error loading GitHub data: {error}</p>
-            <button 
-              onClick={() => setUseGitHubDataMode(false)}
-              className="mt-2 px-4 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 transition-colors"
-            >
-              Switch to Sample Projects
-            </button>
+          <div className="text-center py-12">
+            <div className="bg-red-900/20 border border-red-700 rounded-xl p-6 max-w-md mx-auto">
+              <p className="text-red-300 mb-4">Error loading GitHub data: {error}</p>
+              <button 
+                onClick={() => setUseGitHubDataMode(false)}
+                className="px-4 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors font-medium text-sm"
+              >
+                Switch to Career Projects
+              </button>
+            </div>
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {(useGitHubDataMode ? githubProjects : projects)
             .filter((project) => {
               const startYear = parseInt(project.startDate.split('-')[0])
@@ -207,10 +209,10 @@ function App() {
             ))}
         </div>
 
-        <div className="text-center mt-8 text-gray-400">
-          <p>Showing projects active in {currentYear}</p>
+        <div className="text-center mt-12 py-6">
+          <p className="text-slate-300 font-medium">Showing projects active in {currentYear}</p>
           {useGitHubDataMode && (
-            <p className="text-xs mt-1">Data fetched from GitHub API</p>
+            <p className="text-slate-500 text-sm mt-1">Data fetched from GitHub API</p>
           )}
         </div>
       </div>

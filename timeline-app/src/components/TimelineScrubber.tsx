@@ -53,44 +53,50 @@ export default function TimelineScrubber({
   const years = Array.from({ length: totalYears + 1 }, (_, i) => startYear + i)
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <div className="text-center mb-4">
+    <div className="w-full max-w-5xl mx-auto mb-8">
+      <div className="text-center mb-6">
         <motion.div
-          className="inline-block text-3xl font-bold text-white bg-purple-600 px-4 py-2 rounded-lg"
+          className="inline-flex items-center justify-center text-3xl font-light text-white bg-slate-800 px-6 py-3 rounded-xl shadow-lg border border-slate-700"
           key={currentYear}
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.2 }}
+          initial={{ scale: 1.05, opacity: 0.8 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          {currentYear}
+          <span className="text-blue-400 font-medium">{currentYear}</span>
         </motion.div>
       </div>
 
-      <div
-        ref={timelineRef}
-        className="relative h-16 bg-gray-800 rounded-full cursor-pointer"
-        onClick={handleClick}
-        onMouseMove={handleMouseMove}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        <div className="absolute inset-y-0 left-0 bg-purple-600 rounded-full h-full transition-all duration-300"
-             style={{ width: `${progress * 100}%` }} />
-        
-        <motion.div
-          className="absolute top-1/2 transform -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-lg cursor-grab active:cursor-grabbing"
-          style={{ left: `${progress * 100}%`, marginLeft: '-12px' }}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-        />
+      <div className="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700">
+        <div
+          ref={timelineRef}
+          className="relative h-3 bg-slate-700 rounded-full cursor-pointer group"
+          onClick={handleClick}
+          onMouseMove={handleMouseMove}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+        >
+          <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full h-full transition-all duration-500 ease-out"
+               style={{ width: `${progress * 100}%` }} />
+          
+          <motion.div
+            className="absolute top-1/2 transform -translate-y-1/2 w-6 h-6 bg-white border-3 border-blue-500 rounded-full shadow-lg cursor-grab active:cursor-grabbing group-hover:border-indigo-400 transition-colors"
+            style={{ left: `${progress * 100}%`, marginLeft: '-12px' }}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
+          />
 
-        <div className="absolute -bottom-8 left-0 right-0 flex justify-between">
-          {years.map((year) => (
-            <div key={year} className="text-sm text-gray-400 font-medium">
-              {year}
-            </div>
-          ))}
+          <div className="absolute -bottom-8 left-0 right-0 flex justify-between">
+            {years.map((year, index) => (
+              <div key={year} className={`text-xs font-medium transition-colors ${
+                index === 0 || index === years.length - 1 || year % 5 === 0
+                  ? 'text-slate-300' 
+                  : 'text-slate-500'
+              }`}>
+                {year}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
