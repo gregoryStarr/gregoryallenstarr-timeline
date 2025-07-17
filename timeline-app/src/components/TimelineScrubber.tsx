@@ -6,13 +6,15 @@ interface TimelineScrubberProps {
   onYearChange: (year: number) => void
   startYear: number
   endYear: number
+  careerYears?: number[]
 }
 
 export default function TimelineScrubber({
   currentYear,
   onYearChange,
   startYear,
-  endYear
+  endYear,
+  careerYears = []
 }: TimelineScrubberProps) {
   const [isDragging, setIsDragging] = useState(false)
   const timelineRef = useRef<HTMLDivElement>(null)
@@ -87,15 +89,22 @@ export default function TimelineScrubber({
           />
 
           <div className="absolute -bottom-8 left-0 right-0 flex justify-between">
-            {years.map((year, index) => (
-              <div key={year} className={`text-xs font-medium transition-colors ${
-                index === 0 || index === years.length - 1 || year % 5 === 0
-                  ? 'text-slate-300' 
-                  : 'text-slate-500'
-              }`}>
-                {year}
-              </div>
-            ))}
+            {years.map((year, index) => {
+              const isCareerYear = careerYears.includes(year)
+              const isImportantYear = index === 0 || index === years.length - 1 || year % 5 === 0
+              
+              return (
+                <div key={year} className={`text-xs transition-colors ${
+                  isCareerYear 
+                    ? 'text-blue-300 font-bold' 
+                    : isImportantYear
+                      ? 'text-slate-300 font-medium' 
+                      : 'text-slate-500 font-medium'
+                }`}>
+                  {year}
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

@@ -1,12 +1,26 @@
 import { useState } from 'react'
 import TimelineScrubber from './components/TimelineScrubber'
 import ProjectCard from './components/ProjectCard'
+import BackgroundMap from './components/CareerMap'
 import { useGitHubData } from './hooks/useGitHubData'
 
 function App() {
   const [currentYear, setCurrentYear] = useState(2025)
   const [useGitHubDataMode, setUseGitHubDataMode] = useState(false)
   const { projects: githubProjects, loading, error, fetchData } = useGitHubData()
+
+  // Extract career milestone years from projects
+  const careerMilestoneYears = [
+    2001, // FriendFinder start
+    2004, // Yahoo Maps start  
+    2009, // ISO start
+    2014, // Wishclouds start
+    2016, // SeniorAdvisor start
+    2017, // StarrIT start
+    2018, // GLG start
+    2023, // RAPP start
+    2025  // Current
+  ]
 
   const projects = [
     {
@@ -132,8 +146,9 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <div className="container mx-auto px-6 py-6 max-w-7xl">
+    <div className="min-h-screen relative">
+      <BackgroundMap currentYear={currentYear} />
+      <div className="relative z-10 container mx-auto px-6 py-6 max-w-7xl">
         <header className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-light text-white mb-2 tracking-tight">
             Gregory Allen Starr
@@ -174,6 +189,7 @@ function App() {
           onYearChange={setCurrentYear}
           startYear={2001}
           endYear={2025}
+          careerYears={careerMilestoneYears}
         />
 
         {loading && useGitHubDataMode && (
