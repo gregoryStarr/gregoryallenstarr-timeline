@@ -30,14 +30,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.div
-      className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-xl group"
+      className="bg-slate-800 rounded-lg sm:rounded-xl p-3 sm:p-6 border border-slate-700 hover:border-blue-500/50 transition-all duration-300 shadow-lg hover:shadow-xl group"
       whileHover={{ y: -4, scale: 1.01 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${typeColors[project.type]} uppercase tracking-wide`}>
+      <div className="flex items-start justify-between mb-2 sm:mb-4">
+        <div className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs font-semibold text-white ${typeColors[project.type]} uppercase tracking-wide`}>
           {project.type.replace('-', ' ')}
         </div>
         <div className="flex space-x-2">
@@ -64,10 +64,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
 
-      <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-300 transition-colors leading-tight">{project.title}</h3>
-      <p className="text-slate-300 text-sm mb-4 leading-relaxed line-clamp-2">{project.description}</p>
+      <h3 className="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2 group-hover:text-blue-300 transition-colors leading-tight">{project.title}</h3>
+      <p className="text-slate-300 text-xs sm:text-sm mb-2 sm:mb-4 leading-relaxed line-clamp-2">{project.description}</p>
 
-      <div className="flex items-center justify-between text-slate-400 text-xs mb-4">
+      <div className="flex items-center justify-between text-slate-400 text-xs mb-2 sm:mb-4">
         <div className="flex items-center">
           <Calendar className="w-3 h-3 mr-1 text-blue-400" />
           <span className="font-medium">

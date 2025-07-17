@@ -55,10 +55,10 @@ export default function TimelineScrubber({
   const years = Array.from({ length: totalYears + 1 }, (_, i) => startYear + i)
 
   return (
-    <div className="w-full max-w-5xl mx-auto mb-8">
-      <div className="text-center mb-6">
+    <div className="w-full mx-auto mb-4 sm:mb-8 md:max-w-5xl">
+      <div className="text-center mb-3 sm:mb-6">
         <motion.div
-          className="inline-flex items-center justify-center text-3xl font-light text-white bg-slate-800 px-6 py-3 rounded-xl shadow-lg border border-slate-700"
+          className="inline-flex items-center justify-center text-lg sm:text-3xl font-light text-white bg-slate-800 px-3 sm:px-6 py-1.5 sm:py-3 rounded-lg sm:rounded-xl shadow-lg border border-slate-700"
           key={currentYear}
           initial={{ scale: 1.05, opacity: 0.8 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -68,7 +68,7 @@ export default function TimelineScrubber({
         </motion.div>
       </div>
 
-      <div className="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700">
+      <div className="bg-slate-800 rounded-lg sm:rounded-xl p-2 sm:p-6 shadow-xl border border-slate-700">
         <div
           ref={timelineRef}
           className="relative h-3 bg-slate-700 rounded-full cursor-pointer group"
@@ -88,10 +88,11 @@ export default function TimelineScrubber({
             whileTap={{ scale: 0.95 }}
           />
 
-          <div className="absolute -bottom-8 left-0 right-0 flex justify-between">
+          <div className="absolute -bottom-6 sm:-bottom-8 left-0 right-0 flex justify-between overflow-hidden">
             {years.map((year, index) => {
               const isCareerYear = careerYears.includes(year)
               const isImportantYear = index === 0 || index === years.length - 1 || year % 5 === 0
+              const showOnMobile = index === 0 || index === years.length - 1 || year % 10 === 0 || isCareerYear
               
               return (
                 <div key={year} className={`text-xs transition-colors ${
@@ -100,6 +101,8 @@ export default function TimelineScrubber({
                     : isImportantYear
                       ? 'text-slate-300 font-medium' 
                       : 'text-slate-500 font-medium'
+                } ${
+                  showOnMobile ? 'block' : 'hidden sm:block'
                 }`}>
                   {year}
                 </div>

@@ -148,19 +148,19 @@ function App() {
   return (
     <div className="min-h-screen relative">
       <BackgroundMap currentYear={currentYear} />
-      <div className="relative z-10 container mx-auto px-6 py-6 max-w-7xl">
-        <header className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-light text-white mb-2 tracking-tight">
+      <div className="relative z-10 w-full px-3 md:container md:mx-auto md:px-6 py-4 md:py-6 md:max-w-7xl">
+        <header className="text-center mb-4 sm:mb-8">
+          <h1 className="text-xl sm:text-4xl md:text-5xl font-light text-white mb-1 sm:mb-2 tracking-tight">
             Gregory Allen Starr
           </h1>
-          <p className="text-lg text-slate-300 font-light mb-4">
+          <p className="text-xs sm:text-lg text-slate-300 font-light mb-3 sm:mb-4">
             Senior Software Engineer • 20+ Years Experience
           </p>
           
-          <div className="flex justify-center items-center space-x-3">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-3 max-w-md mx-auto md:max-w-none">
             <button
               onClick={() => setUseGitHubDataMode(false)}
-              className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
+              className={`w-full md:w-auto px-4 py-2 rounded-full transition-all duration-300 font-medium text-xs md:text-sm ${
                 !useGitHubDataMode 
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25' 
                   : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'
@@ -173,7 +173,7 @@ function App() {
                 setUseGitHubDataMode(true)
                 fetchData()
               }}
-              className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
+              className={`w-full md:w-auto px-4 py-2 rounded-full transition-all duration-300 font-medium text-xs md:text-sm ${
                 useGitHubDataMode 
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25' 
                   : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'
@@ -213,7 +213,7 @@ function App() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
           {(useGitHubDataMode ? githubProjects : projects)
             .filter((project) => {
               const startYear = parseInt(project.startDate.split('-')[0])
